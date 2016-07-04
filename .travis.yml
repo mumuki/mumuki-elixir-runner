@@ -1,0 +1,16 @@
+language: ruby
+sudo: false
+rvm:
+- 2.0.0
+services:
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_cdbab2fecaaf_key -iv $encrypted_cdbab2fecaaf_iv
+  -in escualo_rsa.enc -out escualo_rsa -d
+- docker pull elixir
+after_success:
+- wget https://raw.githubusercontent.com/mumuki/mumuki-escualo-deploy/master/travis_deploy && chmod u+x travis_deploy
+- ./travis_deploy mocha2
+env:
+  global:
+    secure: Vrp9qEibApVr1pH9YkBHXj6H/xkH6s9NuRruQKn/cnpoGOHrwO+K4D95uMljCBPfgVbFYYquXh3Pc/JGIdZdMO/2ztCTJc251RLslGKjsU4RkVGfwMjDpS8Yqm89zD59CUvM7VMu7QjqT02wc2cDwIGovI9V3y7BU1Yb3VbJmAosF3wpi3KoYvMoKfoPv3nM/cCCW/8uFOTBO41x1SnyZzvo4EKK3wdZ/oWOcql7bsBSOI7XA8zkbEU2MjWNDpdwF6An9nXswKhbauLC0jS85+Kvv3nSVp1bPY9+cBO1fLUz1JrpBWnpeP7pWrDBhr8Z2uYK7uC0MyJ8mwUQ+j/8LEkm+vkzgGpdEtcsoOnIDENIf5+uIVXveUROZ6j/f47GFbwtfP40Vt0R77StMbjDRsW0OeqR3Sm2c2YO5MKwZvlqdmchL5Dc8HEvqpdALYEgIDCrtwQxtANEsGzz8cem0d8WvcU/nUXuAwM2GMePvvHDwYmoDAGYqiK38FSgOJ6uasEJDdNCSj10/ROvCRk2A8WiozNcjJpHs3FCB3FbvxoxAL63O3VkVmUP3vvPAqhQpZvN6vHIUF0PTZfm0FjOKaxl/XiDopiu3QZ+1+zfO4BmxxWlxE/1AgABIWP+Ph3QO862QKERz4QMpbtsw+MUM2zRbmCn2wrHsWq3slGt96A=
