@@ -3,7 +3,6 @@ class TestHook < Mumukit::Templates::FileHook
 
   def compile_file_content(request)
 <<elixir
-
 #{request.extra}
 #{request.content}
 
