@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe TestHook do
+describe ElixirTestHook do
   def req(test, extra, content)
     OpenStruct.new(test:test, extra:extra, content: content)
   end

@@ -1,4 +1,4 @@
-class TestHook < Mumukit::Templates::FileHook
+class ElixirTestHook < Mumukit::Templates::FileHook
   isolated true
 
   def compile_file_content(request)
@@ -19,7 +19,7 @@ elixir
   end
 
   def command_line(filename)
-    "#{exunit_command} #{filename}"
+    "elixir #{filename}"
   end
 
   def format_code(code)

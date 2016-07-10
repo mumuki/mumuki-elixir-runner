@@ -1,4 +1,4 @@
-class MetadataHook < Mumukit::Hook
+class ElixirMetadataHook < Mumukit::Hook
   def metadata
     {language: {
         name: 'elixir',

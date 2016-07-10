@@ -8,7 +8,7 @@ end
 
 
 describe 'running' do
-  let(:runner) { TestHook.new('exunit_command' => 'elixir') }
+  let(:runner) { ElixirTestHook.new }
   let(:file) { File.new('spec/data/sample.exs') }
 
   describe '#run_test_command' do
