@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'mumukit/bridge'
 
 describe 'integration test' do
-  let(:bridge) { Mumukit::Bridge::Bridge.new('http://localhost:4567') }
+  let(:bridge) { Mumukit::Bridge::Runner.new('http://localhost:4567') }
 
   before(:all) do
     @pid = Process.spawn 'rackup -p 4567', err: '/dev/null'
@@ -16,7 +16,7 @@ describe 'integration test' do
         assert true
     end',
                                  extra: '',
-                                 content: "x = 2",
+                                 content: 'x = 2',
                                  expectations: [])
 
     expect(response[:result]).to include('0 failures')
@@ -25,24 +25,6 @@ describe 'integration test' do
     expect(response[:status]).to be(:passed)
     expect(response[:feedback]).to be_empty
     expect(response[:expectation_results]).to be_empty
-  end
-
-  it 'answers a valid hash when submission is not ok' do
-    response = bridge.
-        run_tests!(test: '
-class TestFoo(unittest.TestCase):
-    def test_true(self):
-        self.assertFalse(foo())',
-                   extra: '',
-                   content: 'dsfsdf(asas',
-                   expectations: []).
-        reject { |k, _v| k == :result }
-
-    expect(response).to eq(status: :failed,
-                           expectation_results: [],
-                           feedback: '',
-                           test_results: [],
-                           response_type: :unstructured)
   end
 
 end

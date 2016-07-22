@@ -26,7 +26,7 @@ end
 elixir
 
   describe '#compile' do
-    let(:compiler) { TestHook.new(nil) }
+    let(:compiler) { ElixirTestHook.new }
     it { expect(compiler.compile_file_content(req(true_test, 'x = 2',  ''))).to eq(compiled_test_submission) }
   end
 end
