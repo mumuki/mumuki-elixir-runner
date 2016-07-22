@@ -6,27 +6,15 @@ describe ElixirTestHook do
   end
 
   true_test = <<elixir
-    test "the truth" do
-      assert true
-    end
-elixir
-
-  compiled_test_submission = <<elixir
-x = 2
-
-
-ExUnit.start
-defmodule AssertionTest do
-  use ExUnit.Case, async: true
-    test "the truth" do
-      assert true
-    end
-
+test "the truth" do
+  assert true
 end
 elixir
 
+  compiled_test_submission = "ExUnit.start\ndefmodule ElixirServer do\n  def x do 2 end\n  \n  use ExUnit.Case, async: true\n  test \"the truth\" do\n  assert true\nend\n\nend\n"
+
   describe '#compile' do
     let(:compiler) { ElixirTestHook.new }
-    it { expect(compiler.compile_file_content(req(true_test, 'x = 2',  ''))).to eq(compiled_test_submission) }
+    it { expect(compiler.compile_file_content(req(true_test, 'def x do 2 end',  ''))).to eq(compiled_test_submission) }
   end
 end

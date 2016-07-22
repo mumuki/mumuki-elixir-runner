@@ -7,7 +7,6 @@ ExUnit.start
 defmodule ElixirServer do
   #{request.extra}
   #{request.content}
-
   use ExUnit.Case, async: true
   #{request.test}
 end
