@@ -3,13 +3,13 @@ class ElixirTestHook < Mumukit::Templates::FileHook
 
   def compile_file_content(request)
 <<elixir
-#{request.extra}
-#{request.content}
-
 ExUnit.start
-defmodule AssertionTest do
+defmodule ElixirServer do
+  #{request.extra}
+  #{request.content}
+
   use ExUnit.Case, async: true
-#{request.test}
+  #{request.test}
 end
 elixir
   end
