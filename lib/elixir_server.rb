@@ -8,4 +8,5 @@ end
 
 require_relative 'test_hook'
 require_relative 'metadata_hook'
+require_relative './query_hook'
 require 'mumukit/server/app'
