@@ -7,15 +7,13 @@ class ElixirQueryHook < Mumukit::Templates::FileHook
 
 
   def compile_file_content(r)
-    <<elixir
+   <<elixir
 defmodule ElixirServer do
+
   try do
     #{r.extra}
-
     #{r.content}
-
     #{compile_cookie(r.cookie)}
-
     #{compile_query(r.query)}
   catch
     _ -> IO.puts ""
@@ -28,7 +26,7 @@ elixir
     if query.start_with? 'def '
       "#{query}\nIO.puts \"<function>\""
     else
-      "IO.puts #{query}"
+      "IO.inspect #{query}"
     end
   end
 
