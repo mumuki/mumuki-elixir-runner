@@ -2,7 +2,7 @@ require 'mumukit'
 
 Mumukit.runner_name = 'elixir'
 Mumukit.configure do |config|
-  config.docker_image = 'elixir'
+  config.docker_image = 'mumuki/mumuki-elixir-worker'
 
 end
 
