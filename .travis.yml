@@ -9,8 +9,17 @@ before_install:
   -in escualo_rsa.enc -out escualo_rsa -d
 - docker pull elixir
 after_success:
-- wget https://raw.githubusercontent.com/mumuki/mumuki-escualo-deploy/master/travis_deploy && chmod u+x travis_deploy
+- wget https://raw.githubusercontent.com/mumuki/mumuki-escualo-deploy/master/travis_deploy
+  && chmod u+x travis_deploy
 - ./travis_deploy mocha2
 env:
   global:
     secure: Vrp9qEibApVr1pH9YkBHXj6H/xkH6s9NuRruQKn/cnpoGOHrwO+K4D95uMljCBPfgVbFYYquXh3Pc/JGIdZdMO/2ztCTJc251RLslGKjsU4RkVGfwMjDpS8Yqm89zD59CUvM7VMu7QjqT02wc2cDwIGovI9V3y7BU1Yb3VbJmAosF3wpi3KoYvMoKfoPv3nM/cCCW/8uFOTBO41x1SnyZzvo4EKK3wdZ/oWOcql7bsBSOI7XA8zkbEU2MjWNDpdwF6An9nXswKhbauLC0jS85+Kvv3nSVp1bPY9+cBO1fLUz1JrpBWnpeP7pWrDBhr8Z2uYK7uC0MyJ8mwUQ+j/8LEkm+vkzgGpdEtcsoOnIDENIf5+uIVXveUROZ6j/f47GFbwtfP40Vt0R77StMbjDRsW0OeqR3Sm2c2YO5MKwZvlqdmchL5Dc8HEvqpdALYEgIDCrtwQxtANEsGzz8cem0d8WvcU/nUXuAwM2GMePvvHDwYmoDAGYqiK38FSgOJ6uasEJDdNCSj10/ROvCRk2A8WiozNcjJpHs3FCB3FbvxoxAL63O3VkVmUP3vvPAqhQpZvN6vHIUF0PTZfm0FjOKaxl/XiDopiu3QZ+1+zfO4BmxxWlxE/1AgABIWP+Ph3QO862QKERz4QMpbtsw+MUM2zRbmCn2wrHsWq3slGt96A=
+deploy:
+  provider: rubygems
+  api_key:
+    secure: LjhfsRpbgJEG9t3ryoIYrnWPonEk1cVL9EYebVHg35KPQ72MoLRDkkZQcyu2gxfLCbu0/EslkKxUQxO6v7KJ/XdYL8USf0W3BJwgakINxGyWFU8h2eYGH/hpLOnrrUgoN7J+P/lfFSmZVDKy8J1Ko5du6m+9ZPc2/qH3drclb8YHVjNIGeAGKMeI7URZ9CqH6/WXGiyw97jvdbG2pV0ReRrVFI/DRqInGAe35jo+CezFFCgs9/TgykimYmcVrSMIonlMw8H1cBniDnxERLT4X+pWhZc6vlDFVuRl+pAiNCCwPTFD4bYGB6MYA/Oif+2KjAVdfrWeXhk9evJSG4RscFJOrGNc1i+VHhTfM5M2qyEckFU37FrxQeAz3Nr6jxgDfSIJ/LZhtCkUg07q09YVQxLS+cu0LMsm0EcHu0Cvq+pn7NuyGHP3bStTFKbMTZOIqWWoyfyIeS5pOUmx/AVkGp8j6Tsxni/tkbbqFx+WZnHd8vdzbWBqJF2QtEtDPgVbX5Zwv6bflPvIe8L7JAHppcgKurMwP7ulUGFoslFa38GuBbDIqGDYi2u6YE+twZXFKTkISUMnP/xKazCuSh8U2CZJeztvdj2K296cuTCB3gNZFKPPgjWIU/9ICkZ7rBgoKrOh0e66ohpDT3c0ECWupzgQGDBLVkX4xmVZ6TFlT10=
+  gem: mumuki-elixir-runner
+  on:
+    tags: true
+    repo: mumuki/mumuki-elixir-runner
