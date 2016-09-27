@@ -1,1 +1,1 @@
-require_relative '../lib/elixir_server'
+require_relative '../lib/elixir_runner'
