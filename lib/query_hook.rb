@@ -2,15 +2,10 @@ class ElixirQueryHook < ElixirFileHook
   def compile_file_content(r)
    <<elixir
 defmodule ElixirServer do
-
-  try do
-    #{r.extra}
-    #{r.content}
-    #{compile_cookie(r.cookie)}
-    #{compile_query(r.query)}
-  catch
-    _ -> IO.puts ""
-  end
+  #{r.extra}
+  #{r.content}
+  #{compile_cookie(r.cookie)}
+  #{compile_query(r.query)}
 end
 elixir
   end

@@ -70,6 +70,20 @@ describe 'integration test' do
     expect(response[:result]).to eq "1\n"
   end
 
+  it 'supports queries that pass, with cookie' do
+    response = bridge.run_query!(query: 'x', extra: '', content: 'x = 1', cookie: ['x = x + 1'])
+
+    expect(response[:status]).to eq(:passed)
+    expect(response[:result]).to eq "2\n"
+  end
+
+  skip 'supports queries that pass, with cookie with runtime errors' do
+    response = bridge.run_query!(query: 'x', extra: '', content: 'x = 1', cookie: ['x = x + 1', 'raise "ups"'])
+
+    expect(response[:status]).to eq(:passed)
+    expect(response[:result]).to eq "2\n"
+  end
+
   it 'supports queries that fails' do
     response = bridge.run_query!(query: 'raise "foo"', extra: '', content: 'x = 1')
 
