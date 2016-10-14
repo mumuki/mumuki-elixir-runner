@@ -1,12 +1,5 @@
 require_relative './spec_helper'
 
-
-class File
-  def unlink
-  end
-end
-
-
 describe 'running' do
   let(:runner) { ElixirTestHook.new }
   let(:file) { File.new('spec/data/sample.exs') }
@@ -20,7 +13,7 @@ describe 'running' do
       let(:original_results) { ['.', :passed] }
       let(:results) { runner.post_process_file(file, *original_results) }
 
-      it { expect(results).to eq(["```\n.\n```", :passed]) }
+      it { expect(results).to eq([".", :passed]) }
     end
   end
 end

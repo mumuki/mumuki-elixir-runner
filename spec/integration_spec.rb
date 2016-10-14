@@ -11,20 +11,54 @@ describe 'integration test' do
   after(:all) { Process.kill 'TERM', @pid }
 
   it 'answers a valid hash when submission is ok' do
-    response = bridge.run_tests!(test: '
+    response = bridge.run_tests!(
+        test: '
     test "more truth" do
         assert true
     end',
-                                 extra: '',
-                                 content: 'x = 2',
-                                 expectations: [])
+        extra: '',
+        content: 'x = 2',
+        expectations: [])
 
-    expect(response[:result]).to include('0 failures')
-    expect(response[:response_type]).to be(:unstructured)
-    expect(response[:test_result]).to be_nil
-    expect(response[:status]).to be(:passed)
-    expect(response[:feedback]).to be_empty
-    expect(response[:expectation_results]).to be_empty
+    expect(response.except(:result)).to eq response_type: :unstructured,
+                                           test_results: [],
+                                           status: :passed,
+                                           feedback: '',
+                                           expectation_results: []
   end
 
+
+  it 'answers a valid hash when submission fails' do
+    response = bridge.run_tests!(
+        test: '
+    test "more truth" do
+        assert false
+    end',
+        extra: '',
+        content: 'x = 2',
+        expectations: [])
+
+    expect(response.except(:result)).to eq response_type: :unstructured,
+                                           test_results: [],
+                                           status: :failed,
+                                           feedback: '',
+                                           expectation_results: []
+  end
+
+  it 'answers a valid hash when compilation fails' do
+    response = bridge.run_tests!(
+        test: '
+    "more truth"
+        assert false
+    end',
+        extra: '',
+        content: 'x = 2',
+        expectations: [])
+
+    expect(response.except(:result)).to eq response_type: :unstructured,
+                                           test_results: [],
+                                           status: :errored,
+                                           feedback: '',
+                                           expectation_results: []
+  end
 end

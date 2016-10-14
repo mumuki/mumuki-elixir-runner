@@ -21,12 +21,12 @@ elixir
     "elixir #{filename}"
   end
 
-  def format_code(code)
-    "```\n#{code}\n```"
-  end
-
   def post_process_file(file, result, status)
-    [format_code(result), status]
+    if /\(SyntaxError\) tmp\/mumuki\.compile(.*)\.exs/.matches? result
+      [result, :errored]
+    else
+      super
+    end
   end
 
 end
