@@ -61,4 +61,26 @@ describe 'integration test' do
                                            feedback: '',
                                            expectation_results: []
   end
+
+
+  it 'supports queries that pass' do
+    response = bridge.run_query!(query: 'x', extra: '', content: 'x = 1')
+
+    expect(response[:status]).to eq(:passed)
+    expect(response[:result]).to eq "1\n"
+  end
+
+  it 'supports queries that fails' do
+    response = bridge.run_query!(query: 'raise "foo"', extra: '', content: 'x = 1')
+
+    expect(response[:status]).to eq(:failed)
+    expect(response[:result]).to include "** (RuntimeError) foo\n"
+  end
+
+  it 'supports queries that don\'t compile' do
+    response = bridge.run_query!(query: 'bleh', extra: '', content: '')
+
+    expect(response[:status]).to eq(:errored)
+    expect(response[:result]).to include 'undefined function bleh/0'
+  end
 end
