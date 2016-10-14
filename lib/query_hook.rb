@@ -1,11 +1,4 @@
-class ElixirQueryHook < Mumukit::Templates::FileHook
-  isolated true
-
-  def tempfile_extension
-    '.exs'
-  end
-
-
+class ElixirQueryHook < ElixirFileHook
   def compile_file_content(r)
    <<elixir
 defmodule ElixirServer do

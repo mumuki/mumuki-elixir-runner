@@ -1,6 +1,4 @@
-class ElixirTestHook < Mumukit::Templates::FileHook
-  isolated true
-
+class ElixirTestHook < ElixirFileHook
   def compile_file_content(request)
 <<elixir
 ExUnit.start
@@ -19,14 +17,6 @@ elixir
 
   def command_line(filename)
     "elixir #{filename}"
-  end
-
-  def post_process_file(file, result, status)
-    if /\(SyntaxError\) tmp\/mumuki\.compile(.*)\.exs/.matches? result
-      [result, :errored]
-    else
-      super
-    end
   end
 
 end
