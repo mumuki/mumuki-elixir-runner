@@ -1,2 +1,2 @@
-FROM elixir:1.3
+FROM elixir:1.5-alpine
 MAINTAINER AGUSTIN PINA

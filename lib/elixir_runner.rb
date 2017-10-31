@@ -2,7 +2,7 @@ require 'mumukit'
 
 Mumukit.runner_name = 'elixir'
 Mumukit.configure do |config|
-  config.docker_image = 'mumuki/mumuki-elixir-worker'
+  config.docker_image = 'mumuki/mumuki-elixir-worker:2.0'
   config.comment_type = Mumukit::Directives::CommentType::Ruby
   config.stateful = true
 end
