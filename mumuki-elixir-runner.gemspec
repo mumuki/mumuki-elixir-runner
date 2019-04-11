@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.5'
   spec.add_development_dependency 'rspec', '~> 3.4'
   spec.add_development_dependency 'codeclimate-test-reporter'
-  spec.add_development_dependency 'mumukit-bridge', '~> 1.3'
+  spec.add_development_dependency 'mumukit-bridge', '~> 3.1'
 end
 
 
